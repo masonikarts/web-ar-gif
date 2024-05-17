@@ -4,40 +4,17 @@
   <title>Web AR with GIF</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    #overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-    #gif { display: none; position: absolute; width: 200px; height: auto; }
-  </style>
 </head>
-<body>
-  <div id="overlay">
-    <img id="gif" src="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif" alt="GIF">
-  </div>
+<body style="margin: 0; overflow: hidden;">
   <a-scene embedded arjs="sourceType: webcam;">
     <!-- Hiro Marker -->
-    <a-marker preset="hiro" id="marker">
-      <a-box position='0 0.5 0' material='opacity: 0;'></a-box>
+    <a-marker preset="hiro">
+      <!-- GIF as an image texture -->
+      <a-image src="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif" 
+               rotation="-90 0 0" position="0 0.5 0" width="1.5" height="1.5">
+      </a-image>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const marker = document.getElementById('marker');
-      const gif = document.getElementById('gif');
-      
-      marker.addEventListener('markerFound', () => {
-        gif.style.display = 'block';
-        const { x, y, width, height } = marker.getBoundingClientRect();
-        gif.style.left = `${x + (width / 2) - (gif.width / 2)}px`;
-        gif.style.top = `${y + (height / 2) - (gif.height / 2)}px`;
-      });
-
-      marker.addEventListener('markerLost', () => {
-        gif.style.display = 'none';
-      });
-    });
-  </script>
 </body>
 </html>
