@@ -1,63 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web AR with GIF</title>
+  <title>Web AR with Video</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    #overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-    #canvas { display: none; position: absolute; }
-  </style>
 </head>
-<body>
-  <div id="overlay">
-    <canvas id="canvas" width="400" height="300"></canvas>
-  </div>
+<body style="margin: 0; overflow: hidden;">
   <a-scene embedded arjs="sourceType: webcam;">
     <!-- Hiro Marker -->
-    <a-marker preset="hiro" id="marker">
-      <a-entity id="canvas-plane" geometry="primitive: plane; width: 1.5; height: 1" material="shader: canvas; src: #canvas" rotation="-90 0 0" position="0 0.5 0"></a-entity>
+    <a-marker preset="hiro">
+      <!-- Video as a plane texture -->
+      <a-video id="videoElement" src="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/digital_light_reflections.mp4"
+               rotation="-90 0 0" position="0 0.5 0" width="1.5" height="1"
+               autoplay loop muted>
+      </a-video>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
   
   <script>
+    // Wait for the scene to load
     document.addEventListener('DOMContentLoaded', function () {
-      const marker = document.getElementById('marker');
-      const canvas = document.getElementById('canvas');
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      img.src = 'https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif';
-      
-      img.onload = function () {
-        canvas.style.display = 'block';
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        animateGIF();
+      const video = document.querySelector('#videoElement');
+      video.onloadeddata = function () {
+        video.play();
       };
-      
-      function animateGIF() {
-        let frameIndex = 0;
-        const frames = 30;  // Number of frames in your GIF
-        const delay = 100;  // Delay between frames in ms
-        
-        function drawFrame() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, -frameIndex * canvas.width, 0, img.width, img.height);
-          frameIndex = (frameIndex + 1) % frames;
-          setTimeout(drawFrame, delay);
-        }
-        
-        drawFrame();
-      }
-      
-      marker.addEventListener('markerFound', () => {
-        canvas.style.display = 'block';
-      });
-
-      marker.addEventListener('markerLost', () => {
-        canvas.style.display = 'none';
-      });
     });
   </script>
 </body>
