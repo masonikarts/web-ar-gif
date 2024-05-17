@@ -3,14 +3,14 @@
 <head>
   <title>Web AR with GIF</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
   <a-scene embedded arjs="sourceType: webcam;">
     <!-- Hiro Marker -->
     <a-marker preset="hiro">
       <!-- GIF as a plane texture -->
-      <a-plane src="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif" 
+      <a-plane src="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif"
                rotation="-90 0 0" position="0 0.5 0" width="1.5" height="1">
       </a-plane>
     </a-marker>
