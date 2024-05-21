@@ -12,27 +12,31 @@
   <a-scene embedded arjs="sourceType: webcam;">
     <!-- Hiro Marker -->
     <a-marker preset="hiro" id="hiroMarker">
-      <a-entity id="gifEntity" geometry="primitive: plane; width: 1.5; height: 1"
-                material="shader: flat; src: #gifTexture" rotation="-90 0 0" position="0 0.5 0">
-      </a-entity>
+      <a-image id="gifEntity" src="" rotation="-90 0 0" position="0 0.5 0" width="1.5" height="1">
+      </a-image>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
-
-  <img id="gifTexture" src="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif" style="display: none;">
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const marker = document.getElementById('hiroMarker');
       const gifEntity = document.getElementById('gifEntity');
-      const gifTexture = document.getElementById('gifTexture');
+      const gifSrc = 'https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif';
+
+      const img = new Image();
+      img.src = gifSrc;
+
+      img.onload = function () {
+        gifEntity.setAttribute('src', gifSrc);
+      };
 
       marker.addEventListener('markerFound', () => {
-        gifEntity.setAttribute('material', 'src', gifTexture.src);
+        gifEntity.setAttribute('visible', 'true');
       });
 
       marker.addEventListener('markerLost', () => {
-        gifEntity.setAttribute('material', 'src', '');
+        gifEntity.setAttribute('visible', 'false');
       });
     });
   </script>
