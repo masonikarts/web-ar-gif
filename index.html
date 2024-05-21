@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web AR with GIF</title>
+  <title>Basic A-Frame Test</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-  <script src="https://rawcdn.githack.com/mayognaise/aframe-gif-shader/84fd4c45/dist/aframe-gif-shader.min.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; }
-  </style>
 </head>
 <body>
-  <a-scene embedded arjs="sourceType: webcam;">
-    <!-- Hiro Marker -->
-    <a-marker preset="hiro" id="hiroMarker">
-      <a-plane material="shader: gif; src: url(https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif);" 
-               rotation="-90 0 0" position="0 0.5 0" width="1.5" height="1">
-      </a-plane>
-    </a-marker>
-    <a-entity camera></a-entity>
+  <a-scene>
+    <a-box position="0 1.5 -5" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-sky color="#ECECEC"></a-sky>
   </a-scene>
 </body>
 </html>
