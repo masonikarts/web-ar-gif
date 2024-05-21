@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web AR with Video</title>
+  <title>Web AR with GIF</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
 </head>
-<body style="margin: 0; overflow: hidden;">
+<body>
   <a-scene embedded arjs="sourceType: webcam;">
     <!-- Hiro Marker -->
-    <a-marker preset="hiro">
-      <!-- Video as a plane texture -->
-      <a-video id="videoElement" src="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/digital_light_reflections.mp4"
-               rotation="-90 0 0" position="0 0.5 0" width="1.5" height="1"
-               autoplay loop muted>
-      </a-video>
+    <a-marker preset="hiro" id="hiroMarker">
+      <a-entity id="gifEntity" geometry="primitive: plane; width: 1.5; height: 1"
+                material="shader: flat; src: #gifTexture" rotation="-90 0 0" position="0 0.5 0">
+      </a-entity>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
-  
+
+  <img id="gifTexture" src="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif" style="display: none;">
+
   <script>
-    // Wait for the scene to load
     document.addEventListener('DOMContentLoaded', function () {
-      const video = document.querySelector('#videoElement');
-      video.onloadeddata = function () {
-        video.play();
-      };
+      const marker = document.getElementById('hiroMarker');
+      const gifEntity = document.getElementById('gifEntity');
+      const gifTexture = document.getElementById('gifTexture');
+
+      marker.addEventListener('markerFound', () => {
+        gifEntity.setAttribute('material', 'src', gifTexture.src);
+      });
+
+      marker.addEventListener('markerLost', () => {
+        gifEntity.setAttribute('material', 'src', '');
+      });
     });
   </script>
 </body>
