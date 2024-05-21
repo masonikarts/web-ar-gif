@@ -4,7 +4,7 @@
   <title>Web AR with GIF</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-  <script src="https://rawcdn.githack.com/mayognaise/aframe-gif-shader/84fd4c45/dist/aframe-gif-shader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-gif-shader@latest/dist/aframe-gif-shader.min.js"></script>
   <style>
     body { margin: 0; overflow: hidden; }
   </style>
@@ -35,6 +35,15 @@
 
     document.querySelector('#hiroMarker').addEventListener('markerLost', () => {
       console.log("Marker lost");
+    });
+
+    // Check if the shader is loaded
+    window.addEventListener('load', () => {
+      if (AFRAME.shaders['gif']) {
+        console.log('GIF shader loaded successfully');
+      } else {
+        console.error('Failed to load GIF shader');
+      }
     });
   </script>
 </body>
