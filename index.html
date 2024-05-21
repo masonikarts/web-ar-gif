@@ -19,5 +19,23 @@
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      console.log("DOM fully loaded and parsed");
+    });
+
+    document.querySelector('a-scene').addEventListener('loaded', () => {
+      console.log("A-Frame scene loaded");
+    });
+
+    document.querySelector('#hiroMarker').addEventListener('markerFound', () => {
+      console.log("Marker found");
+    });
+
+    document.querySelector('#hiroMarker').addEventListener('markerLost', () => {
+      console.log("Marker lost");
+    });
+  </script>
 </body>
 </html>
