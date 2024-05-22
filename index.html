@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web AR with Custom Marker</title>
+  <title>Web AR with GIF</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aframe-gif-shader@latest/dist/aframe-gif-shader.min.js"></script>
@@ -12,7 +12,7 @@
 <body>
   <a-scene embedded arjs="sourceType: webcam;">
     <!-- Custom Marker -->
-    <a-marker type="pattern" url="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/pattern-1.patt" id="customMarker">
+    <a-marker type="pattern" url="path/to/your/custom-marker.patt" id="customMarker">
       <a-plane material="shader: gif; src: url(https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_6.gif);" 
                rotation="-90 0 0" position="0 0.5 0" width="1.5" height="1">
       </a-plane>
