@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web AR with GIF</title>
+  <title>Web AR with Image Tracking</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aframe-gif-shader@latest/dist/aframe-gif-shader.min.js"></script>
   <style>
     body { margin: 0; overflow: hidden; }
   </style>
 </head>
 <body>
-  <a-scene embedded arjs="sourceType: webcam;">
-    <!-- Hiro Marker -->
-    <a-marker preset="hiro" id="hiroMarker">
-      <a-plane material="shader: gif; src: url(https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_1.gif);" 
+  <a-scene embedded arjs="trackingMethod: best; sourceType: webcam;">
+    <a-nft type="nft" url="https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/1" smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5">
+      <a-plane material="shader: gif; src: url('https://raw.githubusercontent.com/masonikarts/web-ar-gif/main/converted_video_1.gif');" 
                rotation="-90 0 0" position="0 0.5 0" width="1.5" height="1">
       </a-plane>
-    </a-marker>
+    </a-nft>
     <a-entity camera></a-entity>
   </a-scene>
 
@@ -29,15 +28,14 @@
       console.log("A-Frame scene loaded");
     });
 
-    document.querySelector('#hiroMarker').addEventListener('markerFound', () => {
+    document.querySelector('a-nft').addEventListener('markerFound', () => {
       console.log("Marker found");
     });
 
-    document.querySelector('#hiroMarker').addEventListener('markerLost', () => {
+    document.querySelector('a-nft').addEventListener('markerLost', () => {
       console.log("Marker lost");
     });
 
-    // Check if the shader is loaded
     window.addEventListener('load', () => {
       if (AFRAME.shaders['gif']) {
         console.log('GIF shader loaded successfully');
